@@ -84,8 +84,15 @@ function clickCard(event) {
     event.target.classList.add("open", "show");
     card = event.target.children[0].className;
     tempOpenCards.push(card);
-    if (tempOpenCards.length === 2) {
-        console.log(compareCards(tempOpenCards));
+
+    if (tempOpenCards.length === 2 && compareCards(tempOpenCards)) {
+        matchedCards = tempOpenCards.splice(0, 2);
+        console.log("matched cards", matchedCards);
+        console.log("temp open cards", tempOpenCards);
+    } else if (tempOpenCards.length === 2) {
+        tempOpenCards = [];
+        console.log("matched cards", matchedCards);
+        console.log("temp open cards", tempOpenCards);
     }
     moveCount += 1;
     console.log("move count", moveCount);
