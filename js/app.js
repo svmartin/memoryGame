@@ -78,11 +78,17 @@ createDeckHTML(shuffle(cardDeck));
 let tempOpenCards = [];
 let matchedCards = [];
 let card;
+let moveCount = 0;
 
 function clickCard(event) {
     event.target.classList.add("open", "show");
     card = event.target.children[0].className;
     tempOpenCards.push(card);
+    if (tempOpenCards.length === 2) {
+        console.log(compareCards(tempOpenCards));
+    }
+    moveCount += 1;
+    console.log("move count", moveCount);
     // console.log("card", card);
     // console.log("hereeee", event.target.className);
     // console.log(event.target.value);
