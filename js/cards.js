@@ -18,9 +18,12 @@ const cardDeck = [
   "fa fa-bomb"
 ];
 
-class Cards {
+class Game {
   constructor() {
-
+    this.tempOpenCards = [];
+    this.matchedCards = [];
+    this.moveCount = 0;
+    this.deck = Game.cardDeck;
   }
 
   static get cardDeck() {
@@ -45,12 +48,11 @@ class Cards {
   }
 
   createDeckHTML(cards) {
-    // let cards = '';
     let deck = document.querySelector(".deck");
 
     cards.forEach((card) => {
       let li = document.createElement("li");
-      li.addEventListener("click", clickCard, false);
+      li.addEventListener("click", event => this.clickCard(event), false);
       li.className = "card";
       let i = document.createElement("i");
       i.className = card;
@@ -58,60 +60,49 @@ class Cards {
         .appendChild(li)
         .appendChild(i);
     });
-    // return cards;
   }
-  // createDeckHTML(shuffle(cardDeck));
-  
-  // let tempOpenCards = [];
-  // let matchedCards = [];
-  // let card;
-  // let moveCount = 0;
 
   clickCard(event) {
-    event
-      .target
-      .classList
-      .add("open", "show");
-    card = event.target.children[0].className;
-    tempOpenCards.push(card);
+    event.target.classList.add("open", "show");
+    let card = event.target.children[0].className;
+    this.tempOpenCards.push(card);
 
-    if (tempOpenCards.length === 2 && compareCards(tempOpenCards)) {
-      addMatchedCards();
-      console.log("matched cards", matchedCards);
-      console.log("temp open cards", tempOpenCards);
-    } else if (tempOpenCards.length === 2) {
-      emptyTempCards();
-      console.log("matched cards", matchedCards);
-      console.log("temp open cards", tempOpenCards);
+    if (this.tempOpenCards.length === 2 && this.compareCards(this.tempOpenCards)) {
+      this.addMatchedCards();
+      console.log("matched cards", this.matchedCards);
+      console.log("temp open cards", this.tempOpenCards);
+    } else if (this.tempOpenCards.length === 2) {
+        this.emptyTempCards();
+      console.log("matched cards", this.matchedCards);
+      console.log("temp open cards", this.tempOpenCards);
     }
-    addMove();
-    displayMoves();
+    // addMove();
+    // displayMoves();
 
-    console.log("move count", moveCount);
+    
     // console.log("card", card); console.log("hereeee", event.target.className);
     // console.log(event.target.value);
   }
 
-  addMatchedCards() {
-    matchedCards = tempOpenCards.splice(0, 2);
+  compareCards(cards) {
+    return cards[0] === cards[1] ? true : false;
+    //lockOpen();
   }
 
   emptyTempCards() {
-    tempOpenCards = [];
+    this.tempOpenCards = [];
   }
 
-  displaySymbol() {
-
-  }
-
-   addCard(card) {
-    openCards.push(card);
-  }
-
-  removeCard(card) {
-    openCards.pop(card);
+  addMatchedCards() {
+    this.matchedCards = this.tempOpenCards.splice(0, 2);
   }
 }
-const newDeck = Cards.cardDeck;
-
-console.log(newDeck);
+// const newDeck = Cards.cardDeck;
+// console.log(newDeck);
+// export let game = new Game();
+// let game = new Game();
+// game.createDeckHTML(game.deck);
+document.addEventListener("DOMContentLoaded", () => {
+  let game = new Game();
+  game.createDeckHTML(game.deck);
+});
