@@ -67,41 +67,49 @@ class Game {
     let card = event.target.children[0].className;
     this.tempOpenCards.push(card);
 
-    if (this.tempOpenCards.length === 2 && this.compareCards(this.tempOpenCards)) {
-      this.addMatchedCards();
-      console.log("matched cards", this.matchedCards);
-      console.log("temp open cards", this.tempOpenCards);
-    } else if (this.tempOpenCards.length === 2) {
-        this.emptyTempCards();
-      console.log("matched cards", this.matchedCards);
-      console.log("temp open cards", this.tempOpenCards);
-    }
-    // addMove();
-    // displayMoves();
-
-    
+    this.winner();
+    this.addOneMove();
+    this.updateMovesHTML();    
     // console.log("card", card); console.log("hereeee", event.target.className);
     // console.log(event.target.value);
   }
+
 
   compareCards(cards) {
     return cards[0] === cards[1] ? true : false;
     //lockOpen();
   }
 
-  emptyTempCards() {
-    this.tempOpenCards = [];
+  emptyTempCards(cards) {
+    cards = [];
   }
 
-  addMatchedCards() {
-    this.matchedCards = this.tempOpenCards.splice(0, 2);
+  addMatchedCards(cards) {
+    this.matchedCards.push(cards.splice(0, 2));
+  }
+
+  addOneMove() {
+    this.moveCount += 1;
+  }
+
+  updateMovesHTML() {
+    let movesHTML = document.querySelector(".moves");
+    movesHTML.innerHTML = this.moveCount;
+  }
+
+  winner() {
+    if (this.tempOpenCards.length === 2 && this.compareCards(this.tempOpenCards)) {
+      this.addMatchedCards(this.tempOpenCards);
+      console.log("matched cards", this.matchedCards);
+      console.log("temp open cards", this.tempOpenCards);
+    } else if (this.tempOpenCards.length === 2) {
+      this.emptyTempCards(this.tempOpenCards);
+      console.log("matched cards", this.matchedCards);
+      console.log("temp open cards", this.tempOpenCards);
+    }
   }
 }
-// const newDeck = Cards.cardDeck;
-// console.log(newDeck);
-// export let game = new Game();
-// let game = new Game();
-// game.createDeckHTML(game.deck);
+
 document.addEventListener("DOMContentLoaded", () => {
   let game = new Game();
   game.createDeckHTML(game.deck);
