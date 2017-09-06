@@ -75,7 +75,10 @@ createDeckHTML(shuffle(cardDeck));
 // set up event listener for card
 // * set up the event listener for a card.If a card is clicked : * -display the card 's symbol (put this functionality in another function that you call from this one' +
 //     ')'
+let tempOpenCards = [];
+let matchedCards = [];
 let card;
+
 function clickCard(event) {
     event.target.classList.add("open", "show");
     card = event.target.children[0].className;
@@ -90,8 +93,7 @@ function displaySymbol() {
 }
 
 // * -add the card to a * list * of "open" cards(put this functionality in another function that you call from this one)
-let tempOpenCards = [];
-let matchedCards = [];
+
 
 function addCard(card) {
     openCards.push(card);
@@ -110,7 +112,8 @@ function removeCard(card) {
 //  not match, remove the cards from the list and hide the card 's symbol
 // (put this functionality in another function that you call from this one' +
 // 
-function cardsMatch() {
+function compareCards(cards) {
+    return cards[0] === cards[1] ? true : false;
     //lockOpen();
 }
 
