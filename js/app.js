@@ -57,10 +57,10 @@ function shuffle(array) {
 function createDeckHTML(cards) {
     // let cards = '';
     let deck = document.querySelector(".deck");
-    
+
     cards.forEach((card) => {
         let li = document.createElement("li");
-        li.addEventListener("click", clickCard);
+        li.addEventListener("click", clickCard, false);
         li.className = "card";
         let i = document.createElement("i");
         i.className = card;
@@ -75,8 +75,14 @@ createDeckHTML(shuffle(cardDeck));
 // set up event listener for card
 // * set up the event listener for a card.If a card is clicked : * -display the card 's symbol (put this functionality in another function that you call from this one' +
 //     ')'
-function clickCard() {
-    console.log("I've been clicked.");
+let card;
+function clickCard(event) {
+    event.target.classList.add("open", "show");
+    card = event.target.children[0].className;
+    tempOpenCards.push(card);
+    // console.log("card", card);
+    // console.log("hereeee", event.target.className);
+    // console.log(event.target.value);
 }
 
 function displaySymbol() {
@@ -84,12 +90,15 @@ function displaySymbol() {
 }
 
 // * -add the card to a * list * of "open" cards(put this functionality in another function that you call from this one)
-function addCard() {
-    
+let tempOpenCards = [];
+let matchedCards = [];
+
+function addCard(card) {
+    openCards.push(card);
 }
 
-function removeCard() {
-
+function removeCard(card) {
+    openCards.pop(card);
 }
 
 // * -if the list already has another card,
