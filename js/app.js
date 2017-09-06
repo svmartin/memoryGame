@@ -2,7 +2,7 @@
 
 /*
  * Create a list that holds all of your cards
- * note to self: classes: card, match,open show
+ * note to self: CSS classes: card, match,open show
  */
 const cardDeck = [
     "fa fa-diamond",
@@ -86,21 +86,30 @@ function clickCard(event) {
     tempOpenCards.push(card);
 
     if (tempOpenCards.length === 2 && compareCards(tempOpenCards)) {
-        matchedCards = tempOpenCards.splice(0, 2);
+        addMatchedCards();
         console.log("matched cards", matchedCards);
         console.log("temp open cards", tempOpenCards);
     } else if (tempOpenCards.length === 2) {
-        tempOpenCards = [];
+        emptyTempCards();
         console.log("matched cards", matchedCards);
         console.log("temp open cards", tempOpenCards);
     }
-    moveCount += 1;
+    addMove();
+    displayMoves();
+    
     console.log("move count", moveCount);
     // console.log("card", card);
     // console.log("hereeee", event.target.className);
     // console.log(event.target.value);
 }
 
+function addMatchedCards() {
+    matchedCards = tempOpenCards.splice(0, 2);
+}
+
+function emptyTempCards() {
+    tempOpenCards = [];
+}
 function displaySymbol() {
 
 }
@@ -137,11 +146,12 @@ function lockOpen() {
 // increment the move counter and display it on the page(put this functionality in another function that you call from this one)
 
 function addMove() {
-
+    moveCount += 1;
 }
 
 function displayMoves() {
-
+    let moves = document.querySelector(".moves");
+    moves.innerHTML = moveCount;
 }
 
 // if all cards have matched,
