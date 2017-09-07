@@ -30,6 +30,14 @@ class Game {
     return cardDeck;
   }
 
+  get count() {
+    return Math.floor((this.moveCount / 2));
+  }
+
+  set count(value) {
+    this.moveCount = this.moveCount + value;
+  }
+
   // Shuffle function from http://stackoverflow.com/a/2450976
   shuffle(array) {
     var currentIndex = array.length,
@@ -63,12 +71,16 @@ class Game {
   }
 
   clickCard(event) {
-    event.target.classList.add("open", "show");
-    let card = event.target.children[0].className;
-    this.tempOpenCards.push(card);
+    // event.target.classList.add("open", "show", "last2");
+    // let card = event.target.children[0].className;
+    let card = event.target;
+    card.classList.add("open", "show", "last2");
+    let cardClass = event.target.children[0].className;
+    this.tempOpenCards.push(cardClass);
 
-    this.winner();
-    this.addOneMove();
+    this.winner(card);
+    // this.loser();
+    this.count = 1;
     this.updateMovesHTML();    
     // console.log("card", card); console.log("hereeee", event.target.className);
     // console.log(event.target.value);
@@ -94,15 +106,25 @@ class Game {
 
   updateMovesHTML() {
     let movesHTML = document.querySelector(".moves");
-    movesHTML.innerHTML = this.moveCount;
+    movesHTML.innerHTML = this.count;
   }
 
-  winner() {
+  winner(card) {
     if (this.tempOpenCards.length === 2 && this.compareCards(this.tempOpenCards)) {
       this.addMatchedCards(this.tempOpenCards);
+      let el1 = document.querySelectorAll("li.last2")[0];
+      let el2 = document.querySelectorAll("li.last2")[1];
+      console.log(el1.classList);
+      el1.classList.remove("last2");
+      el2.classList.remove("last2");
       console.log("matched cards", this.matchedCards);
       console.log("temp open cards", this.tempOpenCards);
     } else if (this.tempOpenCards.length === 2) {
+        let el3 = document.querySelectorAll("li.last2")[0];
+        let el4 = document.querySelectorAll("li.last2")[1];
+  
+        el3.classList.remove("open", "show", "last2");
+        el4.classList.remove("open", "show", "last2");
       this.emptyTempCards(this.tempOpenCards);
       console.log("matched cards", this.matchedCards);
       console.log("temp open cards", this.tempOpenCards);
@@ -110,6 +132,7 @@ class Game {
   }
 }
 
+// need to shuffle, but for testing easier to know where cards are
 document.addEventListener("DOMContentLoaded", () => {
   let game = new Game();
   game.createDeckHTML(game.deck);
