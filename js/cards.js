@@ -117,17 +117,25 @@ class Game {
       console.log(el1.classList);
       el1.classList.remove("last2");
       el2.classList.remove("last2");
-      console.log("matched cards", this.matchedCards);
-      console.log("temp open cards", this.tempOpenCards);
+      console.log("matched cards if", this.matchedCards);
+      console.log("temp open cards if", this.tempOpenCards);
     } else if (this.tempOpenCards.length === 2) {
         let el3 = document.querySelectorAll("li.last2")[0];
         let el4 = document.querySelectorAll("li.last2")[1];
+
+        setTimeout(() => {
+          el3.classList.remove("open", "show", "last2");
+          el4.classList.remove("open", "show", "last2");
+          this.tempOpenCards = [];
+          console.log("hi");
+          console.log("matched else if setTime", this.matchedCards);
+          console.log("temp open cards else if setTime", this.tempOpenCards);
+        }, 2000);
   
-        el3.classList.remove("open", "show", "last2");
-        el4.classList.remove("open", "show", "last2");
-      this.emptyTempCards(this.tempOpenCards);
-      console.log("matched cards", this.matchedCards);
-      console.log("temp open cards", this.tempOpenCards);
+        
+        // this.emptyTempCards(this.tempOpenCards);
+        console.log("matched cards else if", this.matchedCards);
+        console.log("temp open cards else if", this.tempOpenCards);
     }
   }
 }
