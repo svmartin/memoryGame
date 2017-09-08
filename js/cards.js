@@ -158,5 +158,8 @@ class Game {
 // need to shuffle, but for testing easier to know where cards are
 document.addEventListener("DOMContentLoaded", () => {
   let game = new Game();
-  game.createDeckHTML(game.deck);
+  let startButton = document.querySelector("header button");
+  startButton.addEventListener("click", () => {
+    game.createDeckHTML(game.deck);
+  });
 });
