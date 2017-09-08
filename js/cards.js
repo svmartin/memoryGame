@@ -70,6 +70,16 @@ class Game {
     });
   }
 
+  startTimer() {
+    let startTime = performance.now();
+
+  }
+
+  stopTimer(startTime) {
+    let stopTime = performance.now();
+    let gameTime = stopTime - startTime;
+  }
+
   clickCard(event) {
     // event.target.classList.add("open", "show", "last2");
     // let card = event.target.children[0].className;
@@ -81,12 +91,17 @@ class Game {
     this.winner(card);
     // this.loser();
     this.count = 1;
-    this.updateMovesHTML();    
+    this.updateMovesHTML();
+    this.isArrayFull();    
     // console.log("card", card); console.log("hereeee", event.target.className);
     // console.log(event.target.value);
   }
 
-
+  isArrayFull() {
+    if (this.matchedCards.length === 8) {
+      console.log("Array is FULL");
+    }
+  }
   compareCards(cards) {
     return cards[0] === cards[1] ? true : false;
     //lockOpen();
