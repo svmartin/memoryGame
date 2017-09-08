@@ -21,11 +21,19 @@ body {
     font-family: 'Coda', cursive;
 }
 
+button {
+    width: 90px;
+    height: 40px;
+    font-size: 1.5em;
+    background-color: #B10DC9;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
 h1 {
