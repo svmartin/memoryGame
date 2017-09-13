@@ -17,15 +17,14 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('https://d.pr/ZwCgQG+'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
 button {
-    width: 90px;
-    height: 40px;
-    font-size: 1.5em;
-    background-color: #B10DC9;
+  height: 20px;
+  width: 90px;
+  background-color: #7FDBFF;
 }
 
 .container {
@@ -33,12 +32,15 @@ button {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: center;
 }
 
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+}
+
+h2 {
+    margin: 5px 0 5px 0;
 }
 
 /*
@@ -114,4 +116,8 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.tingle-demo {
+  display: none;
 }
