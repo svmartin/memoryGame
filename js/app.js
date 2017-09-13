@@ -187,7 +187,7 @@ const cardDeck = [
     let startButton = document.querySelector(".start");
   
     startButton.innerHTML = "Restart";
-    startH2.innerHTML = "Press 'RESTART' to play";
+    startH2.innerHTML = "Press 'RESTART' to play again";
   }
   
   function startGame() {
