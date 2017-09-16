@@ -17,6 +17,8 @@ const cardDeck = [
   "fa fa-bomb"
 ];
 
+// modal from: https://robinparisi.github.io/tingle/
+let smallModal = new tingle.modal({});
 const deckHTML = document.querySelector(".deck");
 let isGameOff = true;
 let matchedCards = [];
@@ -91,8 +93,9 @@ function checkIfWinner() {
 }
 
 function clickCard(event) {
-  if (isClickable()) {
-    let card = event.target;
+  let card = event.target;
+  if (isClickable(card)) {
+
     displayCard(card);
     addCardToOpen(card.firstElementChild.classList.value);
     addMove();
@@ -137,7 +140,7 @@ function displayStarRating() {
 
 function displayWinningMessage() {
   let gameDetails = document.querySelector(".game-details");
-  gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds. 
+  gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
     Your star rating is ${displayStarRating()}.
     Would you like to play again to try to better your score?`;
 
@@ -158,8 +161,16 @@ function flipBack() {
   removeFromOpenCards();
 }
 
-function isClickable() {
-  return openCards.length === 2 || isGameOff ? false : true;
+function isClickable(card) {
+  if (openCards.length === 2) {
+    return false;
+  } else if (isGameOff) {
+      return false
+  } else if (card.classList.contains("open")) {
+      return false;
+  } else {
+    return true;
+  }
 }
 
 function isGameOver() {
