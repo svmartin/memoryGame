@@ -18,7 +18,15 @@ const cardDeck = [
 ];
 
 // modal from: https://robinparisi.github.io/tingle/
-let smallModal = new tingle.modal({});
+// let smallModal = new tingle.modal({});
+let modalTinyBtn = new tingle.modal({
+  footer: true,
+  onClose: function() {
+    startGame();
+  }
+});
+
+
 const deckHTML = document.querySelector(".deck");
 let isGameOff = true;
 let matchedCards = [];
@@ -27,8 +35,7 @@ let openCards = [];
 let gameStats;
 let totalSeconds;
 let starRating;
-let startTime,
-  endingTime;
+let startTime, endingTime;
 
 function createDeckHTML(cards) {
   let deck = document.querySelector(".deck");
@@ -88,7 +95,7 @@ function checkIfWinner() {
     addMatchClass();
     removeFromOpenCards();
   } else {
-    setTimeout(flipBack, 1000);
+    setTimeout(flipBack, 700);
   }
 }
 
@@ -138,15 +145,52 @@ function displayStarRating() {
   return starRating;
 }
 
-function displayWinningMessage() {
-  let gameDetails = document.querySelector(".game-details");
-  gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
-    Your star rating is ${displayStarRating()}.
-    Would you like to play again to try to better your score?`;
+// function displayWinningMessage() {
+//   let gameDetails = document.querySelector(".game-details");
+//   let gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
+//     Your star rating is ${displayStarRating()}.
+//     Would you like to play again to try to better your score?`;
+//
+//   smallModal.open();
+//   gameDetails.innerHTML = gameStats;
+//   smallModal.setContent(document.querySelector(".tingle-demo-tiny").innerHTML);
+// }
 
-  smallModal.open();
+function displayWinningMessage() {
+
+  // let gameDetails = document.querySelector(".game-details");
+  // let gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
+  //    Your star rating is ${displayStarRating()}.
+  //    Would you like to play again to try to better your score?`;
+  //
+  // gameDetails.innerHTML = gameStats;
+  // modalTinyBtn.setContent(document.querySelector('.tingle-demo-tiny').innerHTML);
+  // modalTinyBtn.addFooterBtn('Primary action', 'tingle-btn tingle-btn--primary tingle-btn--pull-right', function() {
+  //     // alert('click on primary button!');
+  //   modalTinyBtn.close();
+  // });
+  // modalTinyBtn.open();
+  let theModal = document.querySelector(".modal");
+  theModal.classList.add("is-active");
+
+  let gameDetails = document.querySelector(".modal-card-body");
+  let gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
+      Your star rating is ${displayStarRating()}.
+      Would you like to play again to try to better your score?`;
   gameDetails.innerHTML = gameStats;
-  smallModal.setContent(document.querySelector(".tingle-demo-tiny").innerHTML);
+
+  let playAgainButton = document.querySelector(".button.is-success");
+  let closeButton = document.querySelector('button.delete');
+
+  playAgainButton.addEventListener('click', function() {
+    theModal.classList.remove("is-active");
+    startGame();
+  });
+
+  closeButton.addEventListener('click', function() {
+    theModal.classList.remove("is-active");
+  });
+
 }
 
 function emptyOpenCards() {
@@ -209,7 +253,7 @@ function startGame() {
   moveCount = 0;
   displayMoveCount();
   isGameOff = false;
-  createDeckHTML(shuffle(cardDeck));
+  createDeckHTML(cardDeck); // add shuffle before final..shuffle off for testing
   startTimer();
   startToRefresh();
 }

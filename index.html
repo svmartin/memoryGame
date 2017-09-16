@@ -7,7 +7,8 @@
   <meta name="description" content="">
   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.11.0/tingle.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.11.0/tingle.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
 
@@ -22,6 +23,24 @@
     <div class="tingle-demo tingle-demo-tiny">
       <h1 class="congrat-user">You did it!</h1>
       <p class="game-details"></p>
+    </div>
+
+    <div class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Memory Game Master</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <!-- You did it! Would you like to play again? -->
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">play again?</button>
+          <!-- <button class="button">Cancel</button> -->
+        </footer>
+      </div>
     </div>
 
 
@@ -40,7 +59,6 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.11.0/tingle.js"></script>
-  <script src="js/modal.js"></script>
   <script src="js/app.js"></script>
 </body>
 
