@@ -7,7 +7,6 @@
   <meta name="description" content="">
   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
   <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.11.0/tingle.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
@@ -20,10 +19,6 @@
       <h2>Press 'START' to play</h2>
     </header>
     <button class="start">Start</button>
-    <div class="tingle-demo tingle-demo-tiny">
-      <h1 class="congrat-user">You did it!</h1>
-      <p class="game-details"></p>
-    </div>
 
     <div class="modal">
       <div class="modal-background"></div>
@@ -33,32 +28,27 @@
           <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-          <!-- Content ... -->
-          <!-- You did it! Would you like to play again? -->
+
         </section>
         <footer class="modal-card-foot">
           <button class="button is-success">play again?</button>
-          <!-- <button class="button">Cancel</button> -->
         </footer>
       </div>
     </div>
 
-
     <section class="score-panel">
       <ul class="stars">
-        <li><i class="fa fa-star"></i></li>
-        <li><i class="fa fa-star"></i></li>
-        <li><i class="fa fa-star"></i></li>
+
       </ul>
 
-      <span class="moves">0</span> Moves
+      <span class="moves">0</span> Moves |
+      <span id="basicUsage">00:00:00</span>
     </section>
 
     <ul class="deck">
     </ul>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.11.0/tingle.js"></script>
+  <script src="js/easytimer.js"></script>
   <script src="js/app.js"></script>
 </body>
 

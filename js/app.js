@@ -17,16 +17,6 @@ const cardDeck = [
   "fa fa-bomb"
 ];
 
-// modal from: https://robinparisi.github.io/tingle/
-// let smallModal = new tingle.modal({});
-let modalTinyBtn = new tingle.modal({
-  footer: true,
-  onClose: function() {
-    startGame();
-  }
-});
-
-
 const deckHTML = document.querySelector(".deck");
 let isGameOff = true;
 let matchedCards = [];
@@ -36,6 +26,7 @@ let gameStats;
 let totalSeconds;
 let starRating;
 let startTime, endingTime;
+let timer = new Timer();
 
 function createDeckHTML(cards) {
   let deck = document.querySelector(".deck");
@@ -145,31 +136,7 @@ function displayStarRating() {
   return starRating;
 }
 
-// function displayWinningMessage() {
-//   let gameDetails = document.querySelector(".game-details");
-//   let gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
-//     Your star rating is ${displayStarRating()}.
-//     Would you like to play again to try to better your score?`;
-//
-//   smallModal.open();
-//   gameDetails.innerHTML = gameStats;
-//   smallModal.setContent(document.querySelector(".tingle-demo-tiny").innerHTML);
-// }
-
 function displayWinningMessage() {
-
-  // let gameDetails = document.querySelector(".game-details");
-  // let gameStats = `It took you ${moveCount} moves and ${totalTime()} seconds.
-  //    Your star rating is ${displayStarRating()}.
-  //    Would you like to play again to try to better your score?`;
-  //
-  // gameDetails.innerHTML = gameStats;
-  // modalTinyBtn.setContent(document.querySelector('.tingle-demo-tiny').innerHTML);
-  // modalTinyBtn.addFooterBtn('Primary action', 'tingle-btn tingle-btn--primary tingle-btn--pull-right', function() {
-  //     // alert('click on primary button!');
-  //   modalTinyBtn.close();
-  // });
-  // modalTinyBtn.open();
   let theModal = document.querySelector(".modal");
   theModal.classList.add("is-active");
 
@@ -185,12 +152,12 @@ function displayWinningMessage() {
   playAgainButton.addEventListener('click', function() {
     theModal.classList.remove("is-active");
     startGame();
+
   });
 
   closeButton.addEventListener('click', function() {
     theModal.classList.remove("is-active");
   });
-
 }
 
 function emptyOpenCards() {
@@ -209,9 +176,9 @@ function isClickable(card) {
   if (openCards.length === 2) {
     return false;
   } else if (isGameOff) {
-      return false
+    return false
   } else if (card.classList.contains("open")) {
-      return false;
+    return false;
   } else {
     return true;
   }
@@ -247,15 +214,18 @@ function startToRefresh() {
 }
 
 function startGame() {
+  timer.reset();
   deckHTML.innerHTML = "";
   openCards = [];
   matchedCards = [];
   moveCount = 0;
   displayMoveCount();
   isGameOff = false;
-  createDeckHTML(cardDeck); // add shuffle before final..shuffle off for testing
+  createDeckHTML(shuffle(cardDeck)); // add shuffle before final..shuffle off for testing
   startTimer();
   startToRefresh();
+  threeStarsToStart();
+  timer.start(); // easyTimer
 }
 
 function startTimer() {
@@ -272,6 +242,16 @@ function totalTime() {
 
 // if all cards have matched, display a message with the final score (put this
 // functionality in another function that you call from this one)
+function threeStarsToStart() {
+  let threeStars = document.querySelector('.stars');
+  let threeStarsHTML = `<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>`;
+  threeStars.innerHTML = threeStarsHTML;
+}
+
+let timerClock = document.getElementById('basicUsage');
+timer.addEventListener('secondsUpdated', function(e) {
+  timerClock.innerHTML = timer.getTimeValues().toString();
+});
 
 let startButton = document.querySelector(".start");
 startButton.addEventListener("click", startGame, false);
